@@ -508,4 +508,71 @@ footer .nav-item a:hover {
 
 .navbar-toggler:focus {
   box-shadow: none;
+}
+
+.login-panel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #5cb9f3;
+}
+.login-panel .box {
+  background: #fff;
+  text-align: center;
+  width: 380px;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 1px 2px 20px 15px rgba(0, 0, 0, 0.0588235294);
+  border-radius: 10px;
+}
+.login-panel .box h3 {
+  color: #f76969;
+  font-size: 22px;
+}
+.login-panel .box .social {
+  font-size: 28px;
+  margin: 7px 0 17px;
+}
+.login-panel .box a {
+  color: #f76969;
+}
+.login-panel .box a:hover {
+  color: #5cb9f3;
+}
+.login-panel .box input.form-control {
+  background: #F4F5F6;
+  border-radius: 5px;
+  border-color: #D3E1E5;
+  font-size: 13px;
+}
+.login-panel .box input.form-control::-moz-placeholder {
+  color: #888b8b;
+}
+.login-panel .box input.form-control:-ms-input-placeholder {
+  color: #888b8b;
+}
+.login-panel .box input.form-control::placeholder {
+  color: #888b8b;
+}
+
+.asset-box {
+  padding: 20px;
+  background: aliceblue;
+  margin-bottom: 20px;
+  min-height: 101px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+.asset-box h4 {
+  margin: 0;
+  font-size: 0.9rem;
+}
+.asset-box b {
+  color: #5cb9f3;
+  margin-top: 5px;
+  font-weight: normal;
 }/*# sourceMappingURL=app.css.map */

@@ -32,11 +32,11 @@ Route::group(['prefix' =>'admin/', 'middleware' => ['auth', 'is_admin']], functi
     Route::get('agent-register/{id}', 'App\Http\Controllers\Admin\AdminController@agentdestroy');
     //agent registration end
     //user registration
-    Route::get('user-register','App\Http\Controllers\Admin\AdminController@userindex');
-    Route::post('user-register','App\Http\Controllers\Admin\AdminController@userstore');
-    Route::get('user-register/{id}/edit','App\Http\Controllers\Admin\AdminController@useredit');
-    Route::put('user-register/{id}','App\Http\Controllers\Admin\AdminController@userupdate');
-    Route::get('user-register/{id}', 'App\Http\Controllers\Admin\AdminController@userdestroy');
+    Route::get('user-register','App\Http\Controllers\User\UserController@userindex')->name('admin.users');;
+    Route::post('user-register','App\Http\Controllers\User\UserController@userstore');
+    Route::get('user-register/{id}/edit','App\Http\Controllers\User\UserController@useredit');
+    Route::post('user-register/{id}','App\Http\Controllers\User\UserController@update')->name('user.update');
+    Route::get('user-register/{id}', 'App\Http\Controllers\User\UserController@userdestroy');
     //user registration end
     //code master 
     Route::resource('softcode','App\Http\Controllers\Admin\SoftcodeController');
@@ -55,6 +55,7 @@ Route::group(['prefix' =>'admin/', 'middleware' => ['auth', 'is_admin']], functi
 
     
     Route::get('/assetmanager', [AssetManagerController::class, 'assetmanager'])->name('assetmanager');
+    Route::get('/assetmanager-details/{id}', [AssetManagerController::class, 'assetmanagerdetails'])->name('assetmanager.show');
     Route::post('assetmanager', [AssetManagerController::class, 'assetstore'])->name('asset.store');
     Route::post('assetmanager/{id}', [AssetManagerController::class, 'update'])->name('asset.update');
     // Route::put('/assetmanager/{id}', [AssetManagerController::class, 'update']);

@@ -1,73 +1,85 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <!-- FOR SEO -->
+    <!-- <meta property='og:title' content='Custom Notion-styled Avatar Icon'/>
+    <meta property='og:image' content='./assets/images/link.jpg'/> 
+    <meta property='og:description' content='DESCRIPTION OF YOUR SITE'/>
+    <meta property='og:url' content='URL OF YOUR WEBSITE'/>
+    <meta property='og:image:width' content='1200' />
+    <meta property='og:image:height' content='627' />
+    <meta property="og:type" content='website'/> -->
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
+    <title>Asset Panda</title>
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+    
+    <link rel="icon" href="{{ asset('admin/images/favi.png')}}">
+    <link rel="stylesheet" href="{{ asset('admin/css/bootstrap-5.1.3min.css')}}">
+    <link rel="stylesheet" href="{{ asset('admin/css/app.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/slick.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/slick-theme.css')}}" />
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+</head>
 
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+<body>
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+    <section class="login-panel">
+        <div class="box">
+            <img src="{{ asset('admin/images/brand.png')}}" class="mx-auto mb-3" width="150px">
+            <h3 class="m-0">LOGIN HERE</h3>
+            
+            <small class="text-muted mb-2 ">
+                @if(Session::has('error'))
+                    <div class="alert alert-danger">
+                    {{ Session::get('error')}}
+                    </div>
+                @endif
+            </small>
+            <form method="POST" action="{{ route('login') }}">
+                @csrf
+            <div> 
+                <div class="form-group my-3">
+                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
+                    @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
+                <div class="form-group my-3">
+                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+
+                    @error('password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div> 
+            </div> 
+                 
+            <div class='d-flex justify-content-center mt-2'>
+                    <!-- <button class="btn btn-custom mr-2">Sign up</button> -->
+                    <button type="submit" class="src-btn px-4">
+                        {{ __('Login') }}
+                    </button>
             </div>
+        </form>
         </div>
-    </div>
-</div>
-@endsection
+    </section>
+ 
+    
+
+    <script src="{{ asset('admin/js/bootstrap@5.1.3bundle.min.js')}}"></script>
+    <script src="{{ asset('admin/js/iconify.min.js')}}"></script>
+
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
+ 
+</body>
+
+</html>

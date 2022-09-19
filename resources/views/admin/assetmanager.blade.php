@@ -68,9 +68,9 @@
                         </td>
                         <td>
                             Active
-                        </td>
+                        </td>      
                         <td>
-                            <a href=""><span class="iconify txt-secondary" data-icon="ant-design:eye-filled"></span></a>
+                            <a href="{{ route('assetmanager.show',$data->id)}}"><span class="iconify txt-secondary" data-icon="ant-design:eye-filled"></span></a>
                             {{-- <a href=""><span class="iconify txt-secondary" data-icon="ant-design:edit-filled"></span></a> --}}
 
                             <a href="#" data-id="{{$data->id}}"  data-bs-toggle="modal" data-bs-target="#editAsset{{$data->id}}">
@@ -99,18 +99,18 @@
                                     <form action="{{route('asset.update',$data->id)}}" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         <div class="mb-3">
-                                            <label for="up_image" class="col-form-label">Photo</label>
-                                            <input type="file" id="up_image" name="up_image" class="form-control">
+                                            <label for="upimg" class="col-form-label">Photo</label>
+                                            <input type="file" id="upimg" name="upimg" class="form-control">
                                         </div>
                                         <div class="mb-3">
                                             <label for="up_asset_id" class="col-form-label">Asset ID</label>
-                                            <input type="number" id="up_asset_id" value="{{$data->asset_id}}" name="up_asset_id" class="form-control">
+                                            <input type="text" id="up_asset_id" value="{{$data->asset_id}}" name="up_asset_id" class="form-control">
 
                                             <input type="hidden" value="{{$data->id}}" id="assetupid" name="assetupid">
                                         </div>
                                         <div class="mb-3">
                                             <label for="up_company_id" class="col-form-label">Company ID Number</label>
-                                            <input type="number" id="up_company_id" value="{{$data->company_id}}" name="up_company_id" class="form-control">
+                                            <input type="text" id="up_company_id" value="{{$data->company_id}}" name="up_company_id" class="form-control">
                                         </div>
                                         <div class="mb-3">
                                             <label for="up_name" class="col-form-label">Name</label>
@@ -143,7 +143,7 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="up_serial_no" class="col-form-label">Serial Number: </label>
-                                            <input type="number" id="up_serial_no" name="up_serial_no" value="{{$data->serial_no}}" class="form-control">
+                                            <input type="text" id="up_serial_no" name="up_serial_no" value="{{$data->serial_no}}" class="form-control">
                                         </div>
 
                                         <div class="mb-3 d-flex align-items-center">
@@ -235,7 +235,7 @@
            $(".updateBtn").click(function(){
 
             // alert('update btn');
-            var file_data = $('#up_image').prop('files')[0];
+            var file_data = $('#upimg').prop('files')[0];
                 if(typeof file_data === 'undefined'){
                     file_data = 'null';
                 }

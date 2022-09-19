@@ -27,7 +27,7 @@ Route::get('/clear', function() {
  });
 //  cache clear
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 

@@ -69,7 +69,7 @@ class UserController extends Controller
                     'id'=>auth()->user()->id
                 ];
                 $passwordchange = User::where($where)->get()->first();
-                $passwordchange->password =Hash::make($request->password);
+                $passwordchange->password = Hash::make($request->password);
 
                 if ($passwordchange->save()) {
                     $message ="<div class='alert alert-success'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><b>Password Change Successfully.</b></div>";
@@ -116,4 +116,75 @@ class UserController extends Controller
                 return response()->json(['status'=> 303,'message'=>'Server Error!!']);
             }
         }
+
+
+    public function userindex()
+    {
+        $data = User::where('is_type','=', 'user')->get();
+        return view('admin.users', compact('data'));
+    }
+
+
+    public function userstore(Request $request)
+    {
+
+
+        $data = new User;
+        
+        $data->name = $request->user_name;
+        $data->email = $request->email;
+        $data->password = Hash::make(123456);
+        $data->phone = $request->user_phone;
+        $data->user_company_id = $request->user_company_id;
+        $data->user_position = $request->user_position;
+        $data->building = $request->building;
+        $data->permission = $request->permission;
+        $data->room = $request->room;
+        $data->user_department = $request->user_department;
+        $data->created_by = Auth::user()->id;
+
+        if($data->save()){
+
+            $message ="<div class='alert alert-success'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><b>Data Created Successfully.</b></div>";
+            return response()->json(['status'=> 300,'message'=>$message]);
+        }
+
+
+    }
+
+
+    public function update(Request $request, $id)
+    {
+
+        $data = User::find($id);
+        
+        $data->name = $request->up_user_name;
+        $data->email = $request->up_email;
+        $data->phone = $request->up_user_phone;
+        $data->user_company_id = $request->up_user_company_id;
+        $data->user_position = $request->up_user_position;
+        $data->building = $request->up_building;
+        $data->permission = $request->up_permission;
+        $data->room = $request->up_room;
+        $data->user_department = $request->up_user_department;
+        $data->updated_by = Auth::user()->id;
+        
+        if($data->save()){
+
+            return redirect()->route('admin.users');
+        }
+
+
+    }
+
+
+    public function userdestroy($id)
+    {
+
+        if(User::destroy($id)){
+            return response()->json(['success'=>true,'message'=>'Data has been deleted successfully']);
+        }else{
+            return response()->json(['success'=>false,'message'=>'Delete Failed']);
+        }
+    }
 }

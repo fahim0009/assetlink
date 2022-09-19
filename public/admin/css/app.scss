@@ -622,3 +622,76 @@ footer {
 }
 
 
+.login-panel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: $secondary;
+
+    .box {
+        background: #fff;
+        text-align: center;
+        width: 380px;
+        padding: 50px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        box-shadow: 1px 2px 20px 15px #0000000f;
+        border-radius: 10px;
+
+        h3 {
+            color: $primary;
+            font-size: 22px;
+        }
+
+        .social {
+            font-size: 28px;
+            margin: 7px 0 17px;
+        }
+
+        a {
+            color: $primary;
+
+            &:hover {
+                color: $secondary;
+            }
+        }
+
+        input.form-control {
+            background: #F4F5F6;
+            border-radius: 5px;
+            border-color: #D3E1E5;
+            font-size: 13px;
+
+            &::placeholder {
+                color: #888b8b;
+            }
+        }
+    }
+}
+
+.asset-box{
+    padding: 20px;
+    background: aliceblue;
+    margin-bottom: 20px;
+    min-height: 101px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    h4{
+        margin: 0;
+        font-size: 0.9rem; 
+       
+    }
+    b{
+        color: $secondary;
+        margin-top: 5px;
+        font-weight: normal;
+    }
+}

@@ -5,7 +5,7 @@
                 <nav class="navbar navbar-expand-lg navbar-light py-0 bg-light ">
 
                     <a class="navbar-brand" href="/">
-                        <img src="./images/brand.png" class="">
+                        <img src="{{ asset('admin/images/brand.png')}}" class="">
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
@@ -36,7 +36,7 @@
                                 <a class="nav-link" href="{{route('assetmanager')}}">Asset Manager</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#"  data-bs-toggle="modal" data-bs-target="#addNewUser">Add user</a>
+                                <a class="nav-link" href="{{route('admin.users')}}">All Users</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="">Location</a>

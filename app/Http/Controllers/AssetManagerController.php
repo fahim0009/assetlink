@@ -14,6 +14,13 @@ class AssetManagerController extends Controller
         return view('admin.assetmanager');
     }
 
+    public function assetmanagerdetails($id)
+    {
+        $data = Asset::where('id','=', $id)->first();
+        // dd($data);
+        return view('admin.assetmanagerdetails',compact('data'));
+    }
+
 
     public function assetstore(Request $request)
     {
@@ -93,19 +100,18 @@ class AssetManagerController extends Controller
     public function update(Request $request, $id)
     {
 
-        
         $data = Asset::find($id);
-        // if ($request->up_image != 'null') {
+        if ($request->upimg != 'null') {
 
 
-        //     $request->validate([
-        //         'up_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        //     ]);
-        //     $rand = mt_rand(100000, 999999);
-        //     $imageName = time(). $rand .'.'.$request->up_image->extension();
-        //     $request->up_image->move(public_path('images'), $imageName);
-        //     $data->image= $imageName;
-        // }
+            $request->validate([
+                'upimg' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+            $rand = mt_rand(100000, 999999);
+            $imageName = time(). $rand .'.'.$request->upimg->extension();
+            $request->upimg->move(public_path('images'), $imageName);
+            $data->image= $imageName;
+        }
         $data->asset_id = $request->up_asset_id;
         $data->company_id = $request->up_company_id;
         $data->name = $request->up_name;

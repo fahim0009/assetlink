@@ -51,11 +51,11 @@
                         </div>
                         <div class="mb-3">
                             <label for="asset_id" class="col-form-label">Asset ID</label>
-                            <input type="number" id="asset_id" name="asset_id" class="form-control">
+                            <input type="text" id="asset_id" name="asset_id" class="form-control">
                         </div>
                         <div class="mb-3">
                             <label for="company_id" class="col-form-label">Company ID Number</label>
-                            <input type="number" id="company_id" name="company_id" class="form-control">
+                            <input type="text" id="company_id" name="company_id" class="form-control">
                         </div>
                         <div class="mb-3">
                             <label for="name" class="col-form-label">Name</label>
@@ -88,7 +88,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="serial_no" class="col-form-label">Serial Number: </label>
-                            <input type="number" id="serial_no" name="serial_no" class="form-control">
+                            <input type="text" id="serial_no" name="serial_no" class="form-control">
                         </div>
 
                         <div class="mb-3 d-flex align-items-center">
@@ -143,67 +143,7 @@
             </div>
         </div>
     </div>
-    <!-- add new user -->
-    <div class="modal fade" id="addNewUser" tabindex="-1" aria-labelledby="addNewUserLabel" aria-hidden="true">
-        <div class="modal-dialog  modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h6 class="modal-title text-center" id="addNewAssetLabel">Add New User</h6>
-                    <button type="button" class="btn-close bg-white" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="mb-3">
-                            <label for="" class="col-form-label">User Full Name</label>
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <label for="" class="col-form-label">Company ID</label>
-                            <input type="number" class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <label for="" class="col-form-label">Email</label>
-                            <input type="email" class="form-control">
-                        </div>
-                       
-                        <div class="mb-3">
-                            <label for="" class="col-form-label">Phone</label>
-                            <input type="number" class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <label for="message-text" class="col-form-label">Position:</label>
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <label for="" class="col-form-label">Department</label>
-                            <select name="" id="" class="form-control">
-                                <option value="">dsfdsf</option>
-                                <option value="">dsfdsf</option>
-                                <option value="">dsfdsf</option>
-                                <option value="">dsfdsf</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="" class="col-form-label">Room</label>
-                            <input type="number" class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <label for="" class="col-form-label">Building</label>
-                            <input type="number" class="form-control">
-                        </div>
-
-                         
-
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
-                    <button type="button" class="btn btn-submit py-2 me-3">Add Asset</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    {{-- user form modal here  --}}
     <script src="{{ asset('admin/js/bootstrap@5.1.3bundle.min.js')}}"></script>
     <script src="{{ asset('admin/js/iconify.min.js')}}"></script>
 
@@ -267,7 +207,7 @@
 //header for csrf-token is must in laravel
 $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
 
-           //  make doantion start
+           //  add asset start
            var url = "{{URL::to('/admin/assetmanager')}}";
            $("#addBtn").click(function(){
             // alert('add btn');
@@ -299,12 +239,6 @@ $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('cont
                 form_data.append("checkout", $("#checkout").prop('checked'));
                 form_data.append("status", $("#status").prop('checked'));
 
-
-                // console.log(checkout,status);
-
-                // var c_donation= $('#confirm_donation').prop('checked');
-
-
                 $.ajax({
                   url: url,
                   method: "POST",
@@ -325,7 +259,50 @@ $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('cont
               });                
 
            });
-           // make donation end 
+           // asset add end 
+
+
+
+
+
+           //  add user start
+           var adduserurl = "{{URL::to('/admin/user-register')}}";
+           $("#addUser").click(function(){
+            // alert('add btn');
+        
+            
+                var form_data = new FormData();
+                form_data.append("user_name", $("#user_name").val());
+                form_data.append("user_company_id", $("#user_company_id").val());
+                form_data.append("email", $("#email").val());
+                form_data.append("user_phone", $("#user_phone").val());
+                form_data.append("user_position", $("#user_position").val());
+                form_data.append("building", $("#building").val());
+                form_data.append("permission", $("#permission").val());
+                form_data.append("room", $("#room").val());
+                form_data.append("user_department", $("#user_department").val());
+
+                $.ajax({
+                  url: adduserurl,
+                  method: "POST",
+                  contentType: false,
+                  processData: false,
+                  data:form_data,
+                  success: function (d) {
+                      if (d.status == 303) {
+                          $(".ermsg").html(d.message);
+                      }else if(d.status == 300){
+                        $(".ermsg").html(d.message);
+                        window.setTimeout(function(){location.reload()},2000)
+                      }
+                  },
+                  error: function (d) {
+                      console.log(d);
+                  }
+              });                
+
+           });
+           // user add end 
 
 
 });
