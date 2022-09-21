@@ -4,7 +4,7 @@
             <div class="row">
                 <nav class="navbar navbar-expand-lg navbar-light py-0 bg-light ">
 
-                    <a class="navbar-brand" href="/">
+                    <a class="navbar-brand" href="{{ route('assetmanager')}}">
                         <img src="{{ asset('admin/images/brand.png')}}" class="">
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -50,11 +50,22 @@
                             <li class="nav-item">
                                 <a class="nav-link" href=" ">Vendors</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
+                            
+                            <li class="nav-item dropdown" name="permission">
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdownItem" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="{{ asset('admin/images/user.png')}}" width="25px" class="rounded-circle" alt="">
+                                </a>
+                                <ul class="dropdown-menu  border-0 shadow-lg" aria-labelledby="dropdownItem" >
+                                    <li><a class="dropdown-item" href="{{ route('profile')}}">Profile</a></li>
+                                    <li><a class="dropdown-item" href="#">menus</a></li> 
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                            @csrf
+                                        </form>
+                                    </li>
+                                </ul>
                             </li>
                            
                              

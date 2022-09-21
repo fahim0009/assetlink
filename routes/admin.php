@@ -60,6 +60,7 @@ Route::group(['prefix' =>'admin/', 'middleware' => ['auth', 'is_admin']], functi
     Route::post('assetmanager/{id}', [AssetManagerController::class, 'update'])->name('asset.update');
     // Route::put('/assetmanager/{id}', [AssetManagerController::class, 'update']);
     Route::get('/assetmanager/{id}', [AssetManagerController::class, 'delete']);
+    Route::get('/active-assetmanager',[AssetManagerController::class, 'activeassetmanager']);
 
 });
 //admin part end

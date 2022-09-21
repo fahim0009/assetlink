@@ -1,150 +1,173 @@
 @extends('layouts.admin')
 @section('content')
-<main class="app-content">
-    <div class="row user">
 
-      <div class="col-md-3">
-        <div class="tile p-0">
-          <ul class="nav flex-column nav-tabs user-tabs">
-            <li class="nav-item"><a class="nav-link active" href="#user-image" data-toggle="tab">Image</a></li>
-            <li class="nav-item"><a class="nav-link" href="#user-details" data-toggle="tab">User Details</a></li>
-            <li class="nav-item"><a class="nav-link" href="#user-password" data-toggle="tab">Change Password</a></li>
 
-          </ul>
-        </div>
+
+
+<div class="page-content">
+
+  <div class="content">
+      <!-- breadcrumb -->
+      <div class="breadcrumb  py-2">
+          View Asset
+      </div>            
+      <a href="{{ route('assetmanager')}}" class="mt-5 d-inline-block ms-5" title="Return Home">
+          <span data-icon="akar-icons:arrow-back" class="fs-2 iconify txt-secondary" ></span> 
+      </a>   
+       
+      <div class="container shadow-sm bg-white mt-5 "> 
+          <div class="row">
+              <h5 class="m-0 py-4 txt-secondary px-4">View Profile</h5> <hr>       
+          </div>
       </div>
-      <div class="col-md-9">
-        <div class="tab-content">
-            {{-- image tab --}}
-            <div class="tab-pane active" id="user-image">
-              <div class="tile user-settings">
-                <h4 class="line-head">User Image</h4>
+      <div class="container shadow-sm bg-white mb-5 p-4 profile">
+         
+          <div class="row">
+              <ul class="nav nav-tabs" id="myTab" role="tablist">
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="user-tab" data-bs-toggle="tab" data-bs-target="#user" type="button" role="tab" aria-controls="user" aria-selected="true">User</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="image-tab" data-bs-toggle="tab" data-bs-target="#image" type="button" role="tab" aria-controls="image" aria-selected="false">Change Photo</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="passowrd-tab" data-bs-toggle="tab" data-bs-target="#passowrd" type="button" role="tab" aria-controls="passowrd" aria-selected="false">Change Password</button>
+                  </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                  <br>
                 <div class="ermsg"></div>
-                <form>
-                  <div class="row">
-                    <input id="profileid" value="{{$profile_data->id}}" type="hidden">
-                    <div class="col-md-8 mb-4">
-                        <div style="display: flex;">
-                            <div>
-                                <img class="imgPreview img img-circle"
-                                 width="80" src="{{asset('images/'.$profile_data->photo)}}">
-                            </div>
-                            <div style="margin-left: 15px; flex-grow: 1">
-                                <p>Choose a file</p>
-                                <input id="image" type="file">
-                                <input type="hidden" name="id" value="">
-                                <br>
-                                <div class="progress">
-                                    <div class="progress-bar"
-                                         role="progressbar" aria-valuemin="0"
-                                         aria-valuemax="100">
 
+                  <div class="tab-pane fade show active " id="user" role="tabpanel" aria-labelledby="user-tab">
+                      <form class=" ">
+                          <div class="row   pt-4 px-3">
+                              <div class="col-lg-4">
+                                <input id="profileid" value="{{$profile_data->id}}" type="hidden">
+                                  <div class="mb-3">
+                                      <label for="exampleInputEmail1" class="form-label">Full Name</label>
+                                      <input class="form-control" id="name" value="{{$profile_data->name}}" type="text">
                                     </div>
+                              </div>
+                              <div class="col-lg-4">
+                                  <div class="mb-3">
+                                      <label for="exampleInputEmail1" class="form-label">Email address</label>
+                                      
+                                      <input class="form-control"  id="email" value="{{$profile_data->email}}" type="text">
+                                    </div>
+                              </div>
+                              <div class="col-lg-4">
+                                  <div class="mb-3">
+                                      <label for="exampleInputEmail1" class="form-label">Phone</label>
+                                      <input class="form-control" id="phone" value="{{$profile_data->phone}}" type="text">
+                                    </div>
+                              </div>
+                              <div class="col-lg-4">
+                                  <div class="mb-3">
+                                      <label for="exampleInputEmail1" class="form-label">City</label>
+                                      <input class="form-control" id="city" value="{{$profile_data->city}}" type="text">
+                                    </div>
+                              </div>
+                              <div class="col-lg-4">
+                                  <div class="mb-3">
+                                      <label for="exampleInputEmail1" class="form-label">Country</label>
+                                      <input class="form-control" id="country" value="{{$profile_data->country}}" type="text">
+                                    </div>
+                              </div>
+                              <div class="col-lg-4">
+                                  <div class="mb-3">
+                                      <label for="exampleInputEmail1" class="form-label">Postal Code</label>
+                                      <input class="form-control" id="postal_code" value="{{$profile_data->postal_code}}" type="text">
+                                    </div>
+                              </div>
+                              <div class="col-lg-4">
+                                  <div class="mb-3">
+                                      <label for="exampleInputEmail1" class="form-label">About</label>
+                                      <input class="form-control" id="about" value="{{$profile_data->about}}" type="text">
+                                    </div>
+                              </div>
+                              <div class="col-lg-4">
+                                  <div class="mb-3">
+                                      <label for="exampleInputEmail1" class="form-label">Address</label>
+                                      <textarea class="form-control"  id="address" type="text">{{$profile_data->address}}</textarea>
+                                    </div>
+                              </div>
+                              <div class="col-lg-12">
+                                  <div class="mb-3">
+                                      <button type="button" class="btn btn-theme detailsBtn">Submit</button>
+                                    </div>
+                              </div>
+                          </div> 
+                         
+                        </form>
+                  </div>
+
+
+                  <div class="tab-pane fade" id="image" role="tabpanel" aria-labelledby="image-tab">
+
+                       <input id="profileid" value="{{$profile_data->id}}" type="hidden">
+                       <img src="{{asset('images/'.$profile_data->photo)}}" width="90px" class="mt-4"><br>
+                       <input type="file" class="form-control my-3 " name="" id="pimage"> 
+                       <input type="hidden" name="id" value="">
+                       
+                        <div class="progress">
+                            <div class="progress-bar"
+                                  role="progressbar" aria-valuemin="0"
+                                  aria-valuemax="100">
+
+                            </div>
+                        </div><br>
+                      <button type="button" class="btn btn-theme imgBtn">Update</button>
+
+                  </div>
+
+
+
+                  <div class="tab-pane fade" id="passowrd" role="tabpanel" aria-labelledby="passowrd-tab">
+                      <form class=" ">
+                          <div class="row   pt-4 px-3"> 
+                              <div class="col-lg-4">
+                                  <div class="mb-3">
+                                      <label for="exampleInputEmail1" class="form-label">Old Password</label>
+                                      <input class="form-control" id="old_password" type="password">
+                                  </div>
+                              </div>
+
+                              <div class="col-lg-4">
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">New Passowrd</label>
+                                    <input class="form-control" id="new_password" type="password">
                                 </div>
                             </div>
-                        </div>
 
+                            <div class="col-lg-4">
+                              <div class="mb-3">
+                                  <label for="exampleInputEmail1" class="form-label">Re-type Passowrd</label>
+                                  <input class="form-control" id="password_confirmation" type="password">
+                              </div>
+                            </div>
 
-                      {{-- <label>Image</label> --}}
-                    </div>
+                              <div class="col-lg-12">
+                                  <div class="mb-3">
+                                      <button type="button" class="btn btn-theme passwordBtn">Update</button>
+                                    </div>
+                              </div>
+                          </div> 
+                         
+                        </form>
                   </div>
-                  <div class="row mb-10">
-                    <div class="col-md-12">
-                      <button class="btn btn-primary imgBtn" type="button"><i class="fa fa-fw fa-lg fa-check-circle"></i> Save</button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-
-            <div class="tab-pane fade" id="user-details">
-              <div class="tile user-settings">
-                <h4 class="line-head">User Details</h4>
-                <div class="ermsg"></div>
-                <form>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <input id="profileid" value="{{$profile_data->id}}" type="hidden">
-                      <label>Full Name</label>
-                      <input class="form-control" id="name" value="{{$profile_data->name}}" type="text">
-                    </div>
-                    <div class="col-md-6">
-                      <label>Email</label>
-                      <input class="form-control"  id="email" value="{{$profile_data->email}}" type="text">
-                    </div>
-                    <div class="clearfix"></div>
-                    <div class="col-md-6">
-                      <label>Phone</label>
-                      <input class="form-control" id="phone" value="{{$profile_data->phone}}" type="text">
-                    </div>
-                    <div class="col-md-6">
-                      <label>City</label>
-                      <input class="form-control" id="city" value="{{$profile_data->city}}" type="text">
-                    </div>
-                    <div class="col-md-6">
-                      <label>Country</label>
-                      <input class="form-control" id="country" value="{{$profile_data->country}}" type="text">
-                    </div>
-                    <div class="col-md-6">
-                      <label>Postal Code</label>
-                      <input class="form-control" id="postal_code" value="{{$profile_data->postal_code}}" type="text">
-                    </div>
-                    <div class="col-md-6">
-                      <label>About</label>
-                      <input class="form-control" id="about" value="{{$profile_data->about}}" type="text">
-                    </div>
-                    <div class="col-md-6">
-                      <label>Address</label>
-                      <textarea class="form-control"  id="address" type="text">{{$profile_data->address}}</textarea>
-                    </div>
-                    <div class="clearfix"></div>
-                  </div>
-                  <hr>
-                  <div class="row mb-12">
-                    <div class="col-md-12">
-                      <button class="btn btn-primary detailsBtn" type="button"><i class="fa fa-fw fa-lg fa-check-circle"></i> Save</button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-            {{-- password tab --}}
-            <div class="tab-pane fade" id="user-password">
-              <div class="tile user-settings">
-                <h4 class="line-head">Settings</h4>
-                <div class="ermsg"></div>
-                <form>
-                  <div class="row">
-                    <div class="col-md-8 mb-4">
-                      <label>Old Password</label>
-                      <input class="form-control" id="old_password" type="password">
-                    </div>
-                  </div>
-                  <div class="row mb-4">
-                    <div class="col-md-4">
-                      <label>New Password</label>
-                      <input class="form-control" id="new_password" type="password">
-                    </div>
-                    <div class="col-md-4">
-                      <label>Re-type Password</label>
-                      <input class="form-control" id="password_confirmation" type="password">
-                    </div>
-                  </div>
-                  <div class="row mb-10">
-                    <div class="col-md-12">
-                      <button class="btn btn-primary passwordBtn" type="button"><i class="fa fa-fw fa-lg fa-check-circle"></i> Save</button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-
-        </div>
+                </div>
+          </div>
       </div>
-    </div>
-  </main>
+
+  </div>
+</div>
+
+
+
+
+
 @endsection
-@section('script')
+@section('scripts')
 
 
 <script>
@@ -155,7 +178,6 @@
       var url = "{{URL::to('/admin/profile')}}";
       //console.log(url);
       $(".detailsBtn").click(function(){
-           //alert('btn work');
           var name= $("#name").val();
           var email= $("#email").val();
           var phone= $("#phone").val();
@@ -179,8 +201,10 @@
                           $(".ermsg").html(d.message);
                       }else if(d.status == 300){
                         pagetop();
-                                success("User Details Updated Successfully!!");
-                          // window.setTimeout(function(){location.reload()},2000)
+                        
+                        $(".ermsg").html(d.message);
+                                // success("User Details Updated Successfully!!");
+                          window.setTimeout(function(){location.reload()},20000)
                       }
                   },
                   error:function(d){
@@ -191,7 +215,6 @@
 
       var passwordurl = "{{URL::to('/admin/changepassword')}}";
             $(".passwordBtn").click(function(){
-                //alert('btn work');
                 var password= $("#new_password").val();
                 var confirmpassword= $("#password_confirmation").val();
                 var opassword= $("#old_password").val();
@@ -221,7 +244,8 @@
 
             var imgurl = "{{URL::to('/admin/image')}}";
             $(".imgBtn").click(function(){
-              var file_data = $('#image').prop('files')[0];
+              // alert('btn work');
+              var file_data = $('#pimage').prop('files')[0];
                   if(typeof file_data === 'undefined'){
                     file_data = 'null';
                   }
@@ -240,7 +264,8 @@
                               $(".ermsg").html(d.message);
                           }else if(d.status == 300){
                             pagetop();
-                                success("Profile Image Updated Successfully!!");
+                            $(".ermsg").html(d.message);
+                                // success("Profile Image Updated Successfully!!");
                             window.setTimeout(function(){location.reload()},2000)
                           }
                       },
@@ -263,7 +288,7 @@
             var id = $('input[name="id"]').val();
 
 
-            $('#image').change(function () {
+            $('#pimage').change(function () {
                 var photo = $(this)[0].files[0];
                 var formData = new FormData();
                 formData.append('id', id);

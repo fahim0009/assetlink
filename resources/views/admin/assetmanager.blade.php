@@ -38,6 +38,7 @@
             <table class="  table-custom shadow-sm bg-white" style="width:100%">
                 <thead>
                     <tr>
+                        <th>#</th>
                         <th style="width: 15%;">Name</th>
                         <th>Company Id</th>
                         <th>Brand</th>
@@ -54,6 +55,7 @@
 
                     @foreach (\App\Models\Asset::orderby('id','DESC')->get() as $data)
                     <tr>
+                        <td> <input type="checkbox" class="form-check-input" ></td>
                         <td style="width: 15%;">{{ $data->name }}</td>
                         <td>{{ $data->company_id }}</td>
                         <td>{{ $data->brand }}</td>
@@ -67,8 +69,11 @@
                                     data-icon="entypo:text-document-inverted"></span></a>
                         </td>
                         <td>
-                            Active
-                        </td>      
+                            <div class="form-check form-switch">
+                                {{-- <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked> --}}
+                                <input type="checkbox" class="form-check-input" id="flexSwitchCheckChecked" data-id="{{$data->id}}" {{ $data->status ? 'checked' : '' }}><span class="flip-indecator" data-toggle-on="Active" data-toggle-off="Inactive"></span>
+                              </div>
+                        </td>     
                         <td>
                             <a href="{{ route('assetmanager.show',$data->id)}}"><span class="iconify txt-secondary" data-icon="ant-design:eye-filled"></span></a>
                             {{-- <a href=""><span class="iconify txt-secondary" data-icon="ant-design:edit-filled"></span></a> --}}
@@ -218,6 +223,34 @@
 @endsection
 
 @section('scripts')
+<script>
+    $(function() {
+      $('.form-check-input').change(function() {
+        var url = "{{URL::to('/admin/active-assetmanager')}}";
+          var status = $(this).prop('checked') == true ? 1 : 0;
+          var id = $(this).data('id');
+           console.log(status);
+          $.ajax({
+              type: "GET",
+              dataType: "json",
+              url: url,
+              data: {'status': status, 'id': id},
+              success: function(d){
+                // console.log(data.success)
+                if (d.status == 303) {
+                                $(".ermsg").html(d.message);
+                            }else if(d.status == 300){
+                                $(".ermsg").html(d.message);
+                                // window.setTimeout(function(){location.reload()},2000)
+                            }
+                        },
+                        error: function (d) {
+                            console.log(d);
+                        }
+          });
+      })
+    })
+  </script>
 
 <script>
 

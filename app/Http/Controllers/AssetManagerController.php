@@ -155,79 +155,36 @@ class AssetManagerController extends Controller
 
     }
 
-
-    public function update2(Request $request, $id)
-    {
-
-
-        
-        $data = Asset::find($request->assetupid);
-        // intervention
-        if ($request->image != 'null') {
-            $originalImage= $request->file('image');
-            $thumbnailImage = Image::make($originalImage);
-            $thumbnailPath = public_path().'/images/thumbnail/';
-            $originalPath = public_path().'/images/';
-            $time = time();
-            $thumbnailImage->save($originalPath.$time.$originalImage->getClientOriginalName());
-            $thumbnailImage->resize(150,150);
-            $thumbnailImage->save($thumbnailPath.$time.$originalImage->getClientOriginalName());
-            $data->image= $time.$originalImage->getClientOriginalName();
-        }
-        $data->asset_id = $request->asset_id;
-        $data->company_id = $request->company_id;
-        $data->name = $request->name;
-        $data->category = $request->category;
-        $data->description = $request->description;
-        $data->manufacturer = $request->manufacturer;
-        $data->model = $request->model;
-        $data->brand = $request->brand;
-        $data->vendor = $request->vendor;
-        $data->serial_no = $request->serial_no;
-        $data->notes = $request->notes;
-        $data->asset_manager = $request->asset_manager;
-        $data->department = $request->department;
-        $data->location = $request->location;
-
-        if($request->checkout == "true"){
-            $data->checkout = "1";
-        }else{
-            $data->checkout = "0"; 
-        }
-
-        if($request->status == "true"){
-            $data->status = "1";
-        }else{
-            $data->status = "0";
-        }
-
-        if($request->warranty == "true"){
-            $data->warranty = "1";
-        }else{
-            $data->warranty = "0";
-        }
-
-        $data->updated_by = Auth::user()->id;
-
-        if($data->save()){
-
-            $message ="<div class='alert alert-success'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><b>Data Updated Successfully.</b></div>";
-            return response()->json(['status'=> 300,'message'=>$message]);
-        }
-
-
-    }
-
-
     public function delete($id)
     {
-        
         if(Asset::destroy($id)){
             return response()->json(['success'=>true,'message'=>'Listing Deleted']);
         }
         else{
             return response()->json(['success'=>false,'message'=>'Update Failed']);
         }
+    }
+
+    public function activeassetmanager(Request $request)
+    {
+        $user = Asset::find($request->id);
+        $user->status = $request->status;
+        $user->save();
+
+        if($request->status==1){
+            $user = Asset::find($request->id);
+            $user->status = $request->status;
+            $user->save();
+            $message ="<div class='alert alert-success'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><b>Active Successfully.</b></div>";
+            return response()->json(['status'=> 300,'message'=>$message]);
+        }else{
+            $user = Asset::find($request->id);
+            $user->status = $request->status;
+            $user->save();
+            $message ="<div class='alert alert-danger'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><b>Inactive Successfully.</b></div>";
+        return response()->json(['status'=> 300,'message'=>$message]);
+        }
+
     }
 
 }

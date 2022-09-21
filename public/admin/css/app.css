@@ -575,4 +575,16 @@ footer .nav-item a:hover {
   color: #5cb9f3;
   margin-top: 5px;
   font-weight: normal;
+}
+
+.dropdown-menu[data-bs-popper] {
+  right: 0;
+  left: unset;
+}
+
+.profile #myTab .nav-link {
+  color: #5cb9f3 !important;
+}
+.profile #myTab .nav-link.active {
+  color: #f76969 !important;
 }/*# sourceMappingURL=app.css.map */

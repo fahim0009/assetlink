@@ -183,6 +183,15 @@
     
 
    <script>
+
+    // page schroll top
+    function pagetop() {
+          window.scrollTo({
+              top: 130,
+              behavior: 'smooth',
+          });
+      }
+      
     function success(msg){
              $.notify({
                      // title: "Update Complete : ",
@@ -260,10 +269,6 @@ $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('cont
 
            });
            // asset add end 
-
-
-
-
 
            //  add user start
            var adduserurl = "{{URL::to('/admin/user-register')}}";
